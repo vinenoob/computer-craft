@@ -10,11 +10,11 @@ local forward = "forward"
 
 function sendCommand (str1, str2)
     rednet.broadcast(str1..","..str2)
-    os.sleep(5)
+    os.sleep(1)
 end
 
-sendCommand(motor, extend)
 sendCommand(base, back)
+sendCommand(motor, extend)
 sendCommand(motor, retract)
 sendCommand(base, extend)
 sendCommand(base, retract)
