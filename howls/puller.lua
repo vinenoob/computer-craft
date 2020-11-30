@@ -22,7 +22,7 @@ function parseArgs(args)
 end
 
 function push ()
-    redstone.setOutput("bakc", false)
+    redstone.setOutput("back", false)
 end
 
 function pull ()
