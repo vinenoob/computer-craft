@@ -14,7 +14,7 @@ end
 function parseArgs(args)
     info = {}
 
-    splitArgs = split(args)
+    splitArgs = split(args, ",")
     info["who"] = splitArgs[0]
     info["what"] = splitArgs[1]
 
