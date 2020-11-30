@@ -1,4 +1,4 @@
-rednet.open("left")
+rednet.open("right")
 
 function split (inputstr, sep)
     if sep == nil then
