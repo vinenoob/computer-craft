@@ -13,7 +13,7 @@ function sendCommand (str1, str2)
     os.sleep(5)
 end
 
-sendCommand(motor, push)
+sendCommand(motor, extend)
 sendCommand(base, back)
 sendCommand(motor, retract)
 sendCommand(base, extend)

@@ -22,11 +22,11 @@ function parseArgs(args)
 end
 
 function push ()
-    redstone.setOutput("forward", true)
+    redstone.setOutput("front", true)
 end
 
 function pull ()
-    redstone.setOutput("forward", false)
+    redstone.setOutput("front", false)
 end
 
 local myName = "puller"
