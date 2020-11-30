@@ -34,10 +34,10 @@ local myName = "puller"
 while true do
     senderId, message, distance = rednet.receive()
     local info = parseArgs(message)
-    if info["who"] == myName do
-        if info["what"] == "push" do
+    if info["who"] == myName then
+        if info["what"] == "push" then
             push()
-        elseif info["what"] == "pull" do
+        elseif info["what"] == "pull" then
             pull()
         end
     end
