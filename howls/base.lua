@@ -29,7 +29,7 @@ function pull ()
     redstone.setOutput("front", false)
 end
 
-local myName = "puller"
+local myName = "base"
 
 while true do
     senderId, message, distance = rednet.receive()

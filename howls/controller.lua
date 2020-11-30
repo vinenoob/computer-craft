@@ -1,7 +1,7 @@
 rednet.open("back")
 
-local motor = "puller"
-local base = "pusher"
+local motor = "motor"
+local base = "base"
 
 local extend = "push"
 local retract = "pull"

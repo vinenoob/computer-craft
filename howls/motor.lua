@@ -29,7 +29,7 @@ function pull ()
     redstone.setOutput("front", true)
 end
 
-local myName = "pusher"
+local myName = "motor"
 
 while true do
     senderId, message, distance = rednet.receive()
