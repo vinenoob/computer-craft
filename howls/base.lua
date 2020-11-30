@@ -22,11 +22,11 @@ function parseArgs(args)
 end
 
 function push ()
-    redstone.setOutput("back", true)
+    redstone.setOutput("forward", true)
 end
 
 function pull ()
-    redstone.setOutput("back", false)
+    redstone.setOutput("forward", false)
 end
 
 local myName = "puller"
@@ -39,6 +39,10 @@ while true do
             push()
         elseif info["what"] == "pull" then
             pull()
+        elseif info["what"] == "forward" then
+            turtle.forward()
+        elseif info["what"] == "back" then
+            turtle.back()
         end
     end
 end
