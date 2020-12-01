@@ -1,12 +1,7 @@
 rednet.open("back")
 
-local east = "east"
-
 local motor = "motor"
 local base = "base"
-
-local eastMotor = east.. " ".. motor
-local eastBase = east.. " ".. base
 
 local extend = "extend"
 local retract = "retract"
@@ -20,12 +15,17 @@ function sendCommand (str1, str2)
     os.sleep(2.5)
 end
 
-sendCommand(eastMotor, breakBlock)
-sendCommand(eastMotor, extend)
-sendCommand(eastMotor, retract)
-sendCommand(eastBase, extend)
-sendCommand(eastBase, retract)
-sendCommand(eastMotor, placeBlock)
 
+while true do
+    print("what direction")
+    local direction = read()
+    local dMotor = direction.." "..motor
+    local dBase = direction.." "..base
+    sendCommand(dMotor, breakBlock)
+    sendCommand(dMotor, extend)
+    sendCommand(dMotor, retract)
+    sendCommand(dBase, extend)
+    sendCommand(dBase, retract)
+    sendCommand(dMotor, placeBlock)
+end
 
-while true do print("hi") os.sleep(.1) end
