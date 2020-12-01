@@ -30,15 +30,15 @@ function breakConnector ()
 end
 
 function extend ()
-    turtle.select(2)
-    turtle.dig()
-    -- redstone.setOutput("bottom", false)
+    -- turtle.select(2)
+    -- turtle.dig()
+    redstone.setOutput("bottom", true)
 end
 
 function retract ()
-    turtle.select(2)
-    turtle.place()
-    -- redstone.setOutput("bottom", true)
+    -- turtle.select(2)
+    -- turtle.place()
+    redstone.setOutput("bottom", false)
 end
 
 local myName = "motor"
