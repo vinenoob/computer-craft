@@ -1,5 +1,3 @@
-rednet.open("right")
-
 function split (inputstr, sep)
     if sep == nil then
             sep = "%s"
@@ -30,6 +28,10 @@ function retract ()
 end
 
 local myName = "motor"
+
+redstone.setOutput("bottom", true)
+
+rednet.open("left")
 
 while true do
     senderId, message, distance = rednet.receive()

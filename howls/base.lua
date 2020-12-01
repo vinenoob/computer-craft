@@ -30,7 +30,6 @@ end
 local myName = "base"
 
 redstone.setOutput("bottom", true)
-
 rednet.open("left")
 
 while true do
