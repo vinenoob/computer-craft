@@ -20,16 +20,18 @@ function parseArgs(args)
 end
 
 function extend ()
-    redstone.setOutput("bottom", false)
+    turtle.dig()
+    -- redstone.setOutput("bottom", false)
 end
 
 function retract ()
-    redstone.setOutput("bottom", true)
+    turtle.place()
+    -- redstone.setOutput("bottom", true)
 end
 
 local myName = "motor"
 
-redstone.setOutput("bottom", true)
+retract()
 
 rednet.open("left")
 
