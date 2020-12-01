@@ -42,7 +42,7 @@ function retract ()
 end
 
 function readDirection ()
-    f = fs.open("direction.txt", "r")
+    local f = fs.open("direction.txt", "r")
     return f.readAll()
 end
 
