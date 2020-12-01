@@ -15,10 +15,6 @@ function sendCommand (str1, str2)
     os.sleep(2.5)
 end
 
-turtle.equipLeft()
-shell.execute("base")
-shell.execute("motor")
-
 while true do
     print("what direction?")
     local direction = read()
