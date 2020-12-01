@@ -19,12 +19,24 @@ function parseArgs(args)
     return (info)
 end
 
+function placeConnector ()
+    turtle.select(1)
+    turtle.placeUp()
+end
+
+function breakConnector ()
+    turtle.select(1)
+    turtle.digUp()
+end
+
 function extend ()
+    turtle.select(2)
     turtle.dig()
     -- redstone.setOutput("bottom", false)
 end
 
 function retract ()
+    turtle.select(2)
     turtle.place()
     -- redstone.setOutput("bottom", true)
 end
@@ -44,9 +56,9 @@ while true do
         elseif info["what"] == "retract" then
             retract()
         elseif info["what"] == "break" then
-            turtle.dig()
+            turtle.breakConnector()
         elseif info["what"] == "place" then
-            turtle.place()
+            turtle.placeConnector()
         -- elseif info["what"] == "forward" then
         --     turtle.forward()
         -- elseif info["what"] == "back" then
