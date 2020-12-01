@@ -21,12 +21,12 @@ function parseArgs(args)
     return (info)
 end
 
-function push ()
-    redstone.setOutput("front", false)
+function extend ()
+    redstone.setOutput("bottom", false)
 end
 
-function pull ()
-    redstone.setOutput("front", true)
+function retract ()
+    redstone.setOutput("bottom", true)
 end
 
 local myName = "motor"
@@ -35,14 +35,18 @@ while true do
     senderId, message, distance = rednet.receive()
     local info = parseArgs(message)
     if info["who"] == myName then
-        if info["what"] == "push" then
-            push()
-        elseif info["what"] == "pull" then
-            pull()
-        elseif info["what"] == "forward" then
-            turtle.forward()
-        elseif info["what"] == "back" then
-            turtle.back()
+        if info["what"] == "extend" then
+            extend()
+        elseif info["what"] == "retract" then
+            retract()
+        elseif info["what"] == "break" then
+            turtle.dig()
+        elseif info["what"] == "place" then
+            turtle.place()
+        -- elseif info["what"] == "forward" then
+        --     turtle.forward()
+        -- elseif info["what"] == "back" then
+        --     turtle.back()
         end
     end
 end

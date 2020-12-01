@@ -1,5 +1,3 @@
-rednet.open("left")
-
 function split (inputstr, sep)
     if sep == nil then
             sep = "%s"
@@ -21,24 +19,28 @@ function parseArgs(args)
     return (info)
 end
 
-function push ()
-    redstone.setOutput("front", true)
+function extend ()
+    redstone.setOutput("bottom", false)
 end
 
-function pull ()
-    redstone.setOutput("front", false)
+function retract ()
+    redstone.setOutput("bottom", true)
 end
 
 local myName = "base"
+
+redstone.setOutput("bottom", true)
+
+rednet.open("left")
 
 while true do
     senderId, message, distance = rednet.receive()
     local info = parseArgs(message)
     if info["who"] == myName then
-        if info["what"] == "push" then
-            push()
-        elseif info["what"] == "pull" then
-            pull()
+        if info["what"] == "extend" then
+            extend()
+        elseif info["what"] == "retract" then
+            retract()
         elseif info["what"] == "forward" then
             turtle.forward()
         elseif info["what"] == "back" then
