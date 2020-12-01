@@ -41,7 +41,12 @@ function retract ()
     redstone.setOutput("bottom", false)
 end
 
-local myName = "motor"
+function readDirection ()
+    f = fs.open("direction.txt", "r")
+    return f.readAll()
+end
+
+local myName = readDirection().. " ".. "motor"
 
 retract()
 
@@ -56,9 +61,9 @@ while true do
         elseif info["what"] == "retract" then
             retract()
         elseif info["what"] == "break" then
-            turtle.breakConnector()
+            breakConnector()
         elseif info["what"] == "place" then
-            turtle.placeConnector()
+            placeConnector()
         -- elseif info["what"] == "forward" then
         --     turtle.forward()
         -- elseif info["what"] == "back" then

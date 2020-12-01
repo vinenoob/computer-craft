@@ -27,7 +27,13 @@ function retract ()
     redstone.setOutput("bottom", true)
 end
 
-local myName = "base"
+function readDirection ()
+    f = fs.open("direction.txt", "r")
+    return f.readAll()
+end
+
+local myName = readDirection().. " ".. "base"
+
 
 redstone.setOutput("bottom", true)
 rednet.open("left")
