@@ -1,5 +1,13 @@
 turnLeft = true
 while true do
+    -- check underneath for crop and harvest/plant
+    below, crop = turtle.inspectDown()
+    if below == true then
+        if crop.state.age == 7 then
+            turtle.digDown()
+            turtle.placeDown()
+        end
+    end
     if turtle.forward() == false then
         if turnLeft == true then
             turtle.turnLeft()
@@ -23,7 +31,5 @@ while true do
             end
         end
         turnLeft = not turnLeft
-
     end
-    -- check underneath for crop and harvest/plant
 end
