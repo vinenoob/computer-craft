@@ -29,6 +29,7 @@ while true do
                 turtle.turnRight()
                 turtle.turnRight()
             end
+            sleep(120)
         end
         turnLeft = not turnLeft
     end
