@@ -1,5 +1,5 @@
 turtle.refuel()
-miningDistance = 10
+miningDistance = 100
 for i = 1, 3, 1 do 
     local distanceToMine = i * miningDistance
     for j = distanceToMine - miningDistance, 1, -1 do
