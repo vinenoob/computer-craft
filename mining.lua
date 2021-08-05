@@ -9,7 +9,7 @@ for i = 1, 3, 1 do
         turtle.dig()
         turtle.forward()
     end
-    for j = distanceToMine, 1, -1 do
+    for j = distanceToMine + miningDistance, 1, -1 do
         turtle.back()
     end
     turtle.turnLeft()
