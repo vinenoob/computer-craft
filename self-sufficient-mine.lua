@@ -87,8 +87,7 @@ while true do
 
     refuel()
     -- inspect blocks in front of us and to the sides
-    local where = "front"
-    where = checkFront()
+    local where = checkFront()
     if where == "" then
         where = checkLeft()
         if where == "" then
@@ -100,6 +99,9 @@ while true do
                 where = checkUp()
                 if where == "" then
                     where = checkDown()
+                    if where == "" then
+                        where = "front"                  
+                    end
                 end
             end
         end
