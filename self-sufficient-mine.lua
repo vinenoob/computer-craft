@@ -7,7 +7,7 @@ local function isCoal(block)
     if loc == nil then
         return false
     end
-    return false
+    return true
 end
 
 local function whereInInventory(thingToFind)
@@ -67,7 +67,7 @@ end
 local function checkUp()
     local _, block = turtle.inspectUp()
     if isCoal(block) then
-        return "front"
+        return "up"
     end
     return ""
 end
@@ -75,7 +75,7 @@ end
 local function checkDown()
     local _, block = turtle.inspectDown()
     if isCoal(block) then
-        return "front"
+        return "down"
     end
     return ""
 end
