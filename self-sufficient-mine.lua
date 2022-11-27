@@ -43,7 +43,7 @@ local function checkFront()
     if isCoal(block) then
         return "front"
     end
-    return nil
+    return ""
 end
 
 local function checkLeft()
@@ -52,7 +52,7 @@ local function checkLeft()
     if isCoal(block) then
         return "front"
     end
-    return nil
+    return ""
 end
 
 local function checkRight()
@@ -61,7 +61,7 @@ local function checkRight()
     if isCoal(block) then
         return "front"
     end
-    return nil
+    return ""
 end
 
 local function checkUp()
@@ -69,7 +69,7 @@ local function checkUp()
     if isCoal(block) then
         return "front"
     end
-    return nil
+    return ""
 end
 
 local function checkDown()
@@ -77,7 +77,7 @@ local function checkDown()
     if isCoal(block) then
         return "front"
     end
-    return nil
+    return ""
 end
 
 
@@ -88,17 +88,17 @@ while true do
     refuel()
     -- inspect blocks in front of us and to the sides
     local where = "front"
-    local where = checkFront()
-    if where == nil then
+    where = checkFront()
+    if where == "" then
         where = checkLeft()
-        if where == nil then
+        if where == "" then
             -- need to reset position
             turtle.turnRight()
             where = checkRight()
-            if where == nil then
+            if where == "" then
                 turtle.turnLeft()
                 where = checkUp()
-                if where == nil then
+                if where == "" then
                     where = checkDown()
                 end
             end
