@@ -1,4 +1,7 @@
 local function isCoal(block)
+    if block == nil then
+        return false
+    end
     local loc = string.find(block.name, "coal")
     if loc == nil then
         return false
