@@ -1,7 +1,8 @@
 local function isCoal(block)
-    if block == nil then
+    if block == "No block to inspect" then
         return false
     end
+    print("checking ", block, " if is coal")
     local loc = string.find(block.name, "coal")
     if loc == nil then
         return false
