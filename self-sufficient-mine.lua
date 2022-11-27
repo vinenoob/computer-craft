@@ -9,13 +9,11 @@ end
 local function whereInInventory(thingToFind)
     for i = 1, 16, 1 do
         local item = turtle.getItemDetail(i)
-        if item == nil then
-            goto continue
-        end
-        if item.name == thingToFind then
-            return i
-        end
-        ::continue::
+        if item ~= nil then
+            if item.name == thingToFind then
+                return i
+            end
+        end        
     end
     return nil
 end
@@ -36,48 +34,74 @@ local function refuel()
     --inspect inventory for coal
 end
 
-local where = ""
+local function checkFront()
+    local _, block = turtle.inspect()
+    if isCoal(block) then
+        return "front"
+    end
+    return nil
+end
+
+local function checkLeft()
+    turtle.turnLeft()
+    local _, block = turtle.inspect()
+    if isCoal(block) then
+        return "front"
+    end
+    return nil
+end
+
+local function checkRight()
+    turtle.turnRight()
+    local _, block = turtle.inspect()
+    if isCoal(block) then
+        return "front"
+    end
+    return nil
+end
+
+local function checkUp()
+    local _, block = turtle.inspectUp()
+    if isCoal(block) then
+        return "front"
+    end
+    return nil
+end
+
+local function checkDown()
+    local _, block = turtle.inspectDown()
+    if isCoal(block) then
+        return "front"
+    end
+    return nil
+end
+
 
 turtle.select(1)
 
 while true do
+
     refuel()
     -- inspect blocks in front of us and to the sides
-    local _, block = turtle.inspect()
-    if isCoal(block) then
-        where = "front"
-        goto mine_move
-    end
-    turtle.turnLeft()
-    _, block = turtle.inspect()
-    if isCoal(block) then
-        where = "front"
-        goto mine_move
-    end
-    turtle.turnRight()
-    turtle.turnRight()
-    _, block = turtle.inspect()
-    if isCoal(block) then
-        where = "front"
-        goto mine_move
-    end
-    turtle.turnLeft()
-    
-    --inspect blocks above and below
-    _, block = turtle.inspectUp()
-    if isCoal(block) then
-        where = "up"
-        goto mine_move
-    end
-
-    _, block = turtle.inspectDown()
-    if isCoal(block) then
-        where = "down"
-        goto mine_move
+    local where = "front"
+    local where = checkFront()
+    if where == nil then
+        where = checkLeft()
+        if where == nil then
+            -- need to reset position
+            turtle.turnRight()
+            where = checkRight()
+            if where == nil then
+                turtle.turnLeft()
+                where = checkUp()
+                if where == nil then
+                    where = checkDown()
+                end
+            end
+        end
     end
     
     -- actually mine and move
-    ::mine_move::
     if where == "front" then
         turtle.dig()
         turtle.forward()
