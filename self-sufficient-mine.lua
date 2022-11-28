@@ -139,6 +139,14 @@ local function digMove(direction)
     move(direction)
 end
 
+local function digMoveIfTarget(direction, targetName)
+    if not checkForBlock(direction, targetName) then
+        return false
+    end
+    digMove(direction)
+    return true
+end
+
 local directions = { "forward", "up", "down", "left", "right" }
 
 local function scanForNearbyOres()
@@ -158,18 +166,22 @@ local function recursiveMine()
     end
     for _, direction in ipairs(oreDirections) do
         -- recursiveMine()
-        if direction == "forward" then
-            digMove(direction)
-        elseif direction == "up" then
-            digMove(direction)
-        elseif direction == "down" then
-            digMove(direction)
-        elseif direction == "left" then
+        local whereToDig = direction
+        if direction == "left" then
             turtle.turnLeft()
-            digMove("forward")
+            whereToDig = "forward"
         elseif direction == "right" then
             turtle.turnRight()
-            digMove("forward")
+            whereToDig = "forward"
+        end
+        -- if we the target isn't actual in front of us like we thought it should, don't dig
+        if not digMoveIfTarget(whereToDig, "ore") then
+            if direction == "left" then
+                turtle.turnRight()
+            elseif direction == "right" then
+                turtle.turnLeft()
+            end
+            return
         end
         recursiveMine()
         if direction == "forward" then
