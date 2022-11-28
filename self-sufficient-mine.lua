@@ -105,9 +105,9 @@ local function checkForBlock(direction, name)
         _, block = turtle.inspect()
         turtle.turnLeft()
     elseif direction == "left" then
-        turtle.turnRight()
-        _, block = turtle.inspect()
         turtle.turnLeft()
+        _, block = turtle.inspect()
+        turtle.turnRight()
     end
     if isBlock(block, name) then
         return true
@@ -146,7 +146,7 @@ local function recursiveMine()
     if #oreDirections == 0 then
         return
     end
-    for _, direction in ipairs(directions) do
+    for _, direction in ipairs(oreDirections) do
         -- recursiveMine()
         if direction == "forward" then
             turtle.dig()
