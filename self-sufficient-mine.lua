@@ -29,7 +29,7 @@ local function whereInInventory(thingToFind)
             if item.name == thingToFind then
                 return i
             end
-        end        
+        end
     end
     return nil
 end
@@ -115,21 +115,31 @@ local function checkForBlock(direction, name)
     return false
 end
 
-local function digMove(direction)
+local function move(direction)
     refuel()
     if direction == "forward" then
-        turtle.dig()
         turtle.forward()
     elseif direction == "up" then
-        turtle.digUp()
         turtle.up()
     elseif direction == "down" then
-        turtle.digDown()
         turtle.down()
+    elseif direction == "back" then
+        turtle.back()
     end
 end
 
-local directions = {"forward", "up", "down", "left", "right"}
+local function digMove(direction)
+    if direction == "forward" then
+        turtle.dig()
+    elseif direction == "up" then
+        turtle.digUp()
+    elseif direction == "down" then
+        turtle.digDown()
+    end
+    move(direction)
+end
+
+local directions = { "forward", "up", "down", "left", "right" }
 
 local function scanForNearbyOres()
     local oreDirections = {}
@@ -149,35 +159,30 @@ local function recursiveMine()
     for _, direction in ipairs(oreDirections) do
         -- recursiveMine()
         if direction == "forward" then
-            turtle.dig()
-            turtle.forward()
+            digMove(direction)
         elseif direction == "up" then
-            turtle.digUp()
-            turtle.up()
+            digMove(direction)
         elseif direction == "down" then
-            turtle.digDown()
-            turtle.down()
+            digMove(direction)
         elseif direction == "left" then
             turtle.turnLeft()
-            turtle.dig()
-            turtle.forward()
+            digMove("forward")
         elseif direction == "right" then
             turtle.turnRight()
-            turtle.dig()
-            turtle.forward()
+            digMove("forward")
         end
         recursiveMine()
         if direction == "forward" then
-            turtle.back()
+            move("back")
         elseif direction == "up" then
-            turtle.down()
+            move("down")
         elseif direction == "down" then
-            turtle.up()
+            move("up")
         elseif direction == "left" then
-            turtle.back()
+            move("back")
             turtle.turnRight()
         elseif direction == "right" then
-            turtle.back()
+            move("back")
             turtle.turnLeft()
         end
     end
@@ -203,13 +208,13 @@ recursiveMine()
 --                 if where == "" then
 --                     where = checkDownForCoal()
 --                     if where == "" then
---                         where = "forward"                  
+--                         where = "forward"
 --                     end
 --                 end
 --             end
 --         end
 --     end
-    
+
 --     -- actually mine and move
 --     digMove(where)
 -- end
