@@ -14,7 +14,6 @@ local function isBlock(questionBlock, targetName)
     if questionBlock == "No block to inspect" then
         return false
     end
-    print("checking ", questionBlock, " if is ", targetName)
     local loc = string.find(questionBlock.name, targetName)
     if loc == nil then
         return false
@@ -159,6 +158,49 @@ local function scanForNearbyOres()
     return oreDirections
 end
 
+-- scan
+-- dig to closest ore
+-- -- if there is no ore, return to origin
+-- dig it up
+-- take its place
+-- repeat
+local function mine()
+    local oreMap = {}
+    local scanMap = {}
+    local backTrack = {}
+    local x = 0 --"forwards/backwards"
+    local y = 0 --"up/down"
+    local z = 0 --"sidways"
+    local firstLoop = true
+    -- probably change 0 compare to function that sees if any of localMap is true
+    while #oreMap ~= 0 or firstLoop do
+        firstLoop = false
+        if not scanMap[tostring(x) + "," + tostring(y) + "," + tostring(z)] then
+            scanMap[tostring(x) + "," + tostring(y) + "," + tostring(z)] = true
+            local oreDirections = scanForNearbyOres()
+            if #oreDirections == 0 then
+                --backtrack one
+            end
+            for _, direction in ipairs(oreDirections) do
+                if direction == "forward" then
+                    oreMap[tostring(x + 1) + "," + tostring(y) + "," + tostring(z)] = true
+                elseif direction == "up" then
+                    oreMap[tostring(x) + "," + tostring(y + 1) + "," + tostring(z)] = true
+                elseif direction == "down" then
+                    oreMap[tostring(x) + "," + tostring(y - 1) + "," + tostring(z)] = true
+                elseif direction == "left" then
+                    oreMap[tostring(x) + "," + tostring(y) + "," + tostring(z - 1)] = true
+                elseif direction == "right" then
+                    oreMap[tostring(x) + "," + tostring(y) + "," + tostring(z + 1)] = true
+                end
+            end
+            if oreMap[tostring(x + 1) + "," + tostring(y) + "," + tostring(z)] then
+
+            end
+        end
+    end
+end
+
 local function recursiveMine()
     local oreDirections = scanForNearbyOres()
     if #oreDirections == 0 then
@@ -174,7 +216,7 @@ local function recursiveMine()
             turtle.turnRight()
             whereToDig = "forward"
         end
-        -- if we the target isn't actual in front of us like we thought it should, don't dig
+        -- if we the target isn't actual in front of us like we thought it should, don't
         if not digMoveIfTarget(whereToDig, "ore") then
             if direction == "left" then
                 turtle.turnRight()
