@@ -138,7 +138,9 @@ end
 
 turtle.select(1)
 
-for i = 1, 100, 1 do
+local digDistance = 50
+
+for i = 1, digDistance, 1 do
     local oreDirections = scanForNearbyOres()
     if #oreDirections > 0 then
         recursiveMine()
@@ -146,6 +148,6 @@ for i = 1, 100, 1 do
     digMove("forward")
 end
 
-for i = 1, 100, 1 do
+for i = 1, digDistance, 1 do
     digMove("back")
 end
